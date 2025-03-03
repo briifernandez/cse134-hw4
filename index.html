@@ -27,6 +27,7 @@
         <a href="work.html">Work</a>
         <a href="resume.html">Resume</a>
       </nav>
+    <button id="toggle" style="display:none;">Switch to Dark</button>
     </header>
 
     <main class="slide-in-left">
@@ -57,7 +58,25 @@
         }
       );
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtn = document.getElementById("toggle");
+      toggleBtn.style.display = "inline-block";
+      const body = document.body;
 
+      const current = localStorage.getItem("mode") || "light";
+      body.dataset.mode = current;
+
+      toggleBtn.textContent = `Switch to ${current === "dark" ? "Light" : "Dark"}`;
+  
+      toggleBtn.addEventListener("click", () => {
+       const updatedMode = body.dataset.mode === "light" ? "dark" : "light";
+        body.dataset.mode = updatedMode;
+        localStorage.setItem("mode", updatedMode);
+        toggleBtn.textContent = `Switch to ${updatedMode === "dark" ? "Light" : "Dark"}`;
+      });
+    });
+  </script>
     <footer id="footer">
       <p>Made with <strong>love</strong> by <em>Briana Fernandez</em>.</p>
     </footer>

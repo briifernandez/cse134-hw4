@@ -4,7 +4,14 @@
   --padding: 1rem;   
   --max-width: 50rem;   
   --nav-gap: 1.5rem;       
-  --full-width: 100dvw;        
+  --full-width: 100dvw;
+  --background-color: white;
+  --text-color: black;        
+}
+
+[data-mode="dark"] {
+  --background-color: black;
+  --text-color: white;
 }
 
 .ocean-image {
