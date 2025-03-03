@@ -284,3 +284,29 @@ footer {
   padding: 10px;
   margin-bottom: 15px; 
 }
+
+
+input:required,
+textarea:required {
+  border: 3px solid #e9e3e3;
+}
+
+
+input:required:valid,
+textarea:required:valid {
+  border: 3px solid rgb(39, 184, 39);
+}
+
+input:required:invalid,
+textarea:required:invalid {
+  border: 2px solid rgb(221, 132, 132);
+}
+
+input:optional,
+textarea:optional {
+  border: 3px solid #fff5f5; 
+}
+
+input:placeholder-shown {
+  color: #999; 
+}
