@@ -112,7 +112,7 @@
     comments.addEventListener('input', () => {
     const chars = maxAmount - comments.value.length;
     outputInformation.textContent = `There are ${chars} characters left.`;
-    outputInformation.style.color = remaining <= 0 ? 'red' : remaining <= 25 ? 'orange' : 'white';
+    outputInformation.style.color = chars <= 0 ? 'red' : chars <= 25 ? 'orange' : 'white';
     });
 
     function handleError(element, message) {
