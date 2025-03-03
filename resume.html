@@ -52,7 +52,7 @@
           </li>
         </ul>
 
-        <form action="https://httpbin.org/post" method="POST">
+        <form action="https://httpbin.org/post" method="POST" id = "contact-form">
           <input type="hidden" name="possible_bot" value="true" />
           <label for="name">Name<span aria-hidden="true">*</span></label>
           <input
@@ -90,4 +90,57 @@
       <p>Made with <strong>love</strong> by <em>Briana Fernandez</em>.</p>
     </footer>
   </body>
+
+
+  <script>
+    let form_errors = [];
+    const form = document.getElementById('contact-form');
+    const name = document.getElementById('name');
+    const emails = document.getElementById('emails');
+    const comments = document.getElementById('comments');
+    const outputError = document.getElementById('error');
+    const outputInformation= document.getElementById('information');
+
+    name.addEventListener('input', () => {
+    name.value = name.value.replace(/[^A-Za-z\s]/g, '');
+    if (!/^[A-Za-z\s]*$/.test(name.value)) {
+     handleError(name, 'You have typed an illegal character');
+    }
+    });
+
+    const maxAmount = 250;
+    comments.addEventListener('input', () => {
+    const chars = maxAmount - comments.value.length;
+    outputInformation.textContent = `There are ${chars} characters left.`;
+    outputInformation.style.color = remaining <= 0 ? 'red' : remaining <= 25 ? 'orange' : 'white';
+    });
+
+    function handleError(element, message) {
+        form_errors.push({
+        field: element.id,
+        error: message,
+    });
+    outputError.textContent = message;
+    element.classList.add('flash-error');
+
+    setTimeout(() => {
+        element.classList.remove('flash-error');
+        outputError.textContent = '';
+    }, 2000);
+    }
+
+    form.addEventListener('submit', (event) => {
+        if (!form.checkValidity()) {
+         event.preventDefault();
+         errorOutput.textContent = 'There are currently errors in the form.';
+        return;
+    }
+    form.appendChild(Object.assign(document.createElement('input'), {
+        type: 'hidden',
+        name: 'form-errors',
+        value: JSON.stringify(form_errors)
+    }));
+    });
+  </script>
+
 </html>
