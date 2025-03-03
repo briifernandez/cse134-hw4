@@ -102,11 +102,12 @@
     const outputInformation= document.getElementById('information');
 
     name.addEventListener('input', () => {
-    name.value = name.value.replace(/[^A-Za-z\s]/g, '');
-    if (!/^[A-Za-z\s]*$/.test(name.value)) {
-     handleError(name, 'You have typed an illegal character');
-    }
-    });
+  const oldValue = name.value;
+  name.value = oldValue.replace(/[^A-Za-z\s]/g, '');
+  if (name.value !== oldValue) {
+    handleError(name, 'You have typed an illegal character');
+  }
+});
 
     const maxAmount = 250;
     comments.addEventListener('input', () => {
