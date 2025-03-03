@@ -115,8 +115,8 @@
     outputInformation.textContent = `There are ${chars} characters left.`;
 
     outputInformation.style.color =
-    charsRemaining <= 0 ? 'red' :
-    charsRemaining <= 25 ? 'orange' :
+    chars <= 0 ? 'red' :
+    chars <= 25 ? 'orange' :
       'white';
     if (charsRemaining < 0) {
       comments.value = comments.value.slice(0, maxAmount);
@@ -130,10 +130,10 @@
         error: message,
     });
     outputError.textContent = message;
-    element.classList.add('flash-error');
+    element.classList.add('error-message');
 
     setTimeout(() => {
-        element.classList.remove('flash-error');
+        element.classList.remove('error-message');
         outputError.textContent = '';
     }, 2000);
     }
