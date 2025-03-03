@@ -102,19 +102,27 @@
     const outputInformation= document.getElementById('information');
 
     name.addEventListener('input', () => {
-  const oldValue = name.value;
-  name.value = oldValue.replace(/[^A-Za-z\s]/g, '');
-  if (name.value !== oldValue) {
-    handleError(name, 'You have typed an illegal character');
-  }
-});
+    const oldValue = name.value;
+    name.value = oldValue.replace(/[^A-Za-z\s]/g, '');
+    if (name.value !== oldValue) {
+      handleError(name, 'You have typed an illegal character');
+    }
+  });
 
     const maxAmount = 250;
     comments.addEventListener('input', () => {
     const chars = maxAmount - comments.value.length;
     outputInformation.textContent = `There are ${chars} characters left.`;
-    outputInformation.style.color = chars <= 0 ? 'red' : chars <= 25 ? 'orange' : 'white';
-    });
+
+    outputInformation.style.color =
+    charsRemaining <= 0 ? 'red' :
+    charsRemaining <= 25 ? 'orange' :
+      'white';
+    if (charsRemaining < 0) {
+      comments.value = comments.value.slice(0, maxAmount);
+      handleError(comments, 'You have have reached the 250 character limit');
+    }
+  });
 
     function handleError(element, message) {
         form_errors.push({
